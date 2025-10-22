@@ -35,6 +35,8 @@ public class RacingCar {
         outputHandler.askAttemptCount();
         int count = inputHandler.getAttemptCountFromUser();
 
+        outputHandler.showExecutionResultMessage();
+
         for (int round = 0; round < count; round++) {
             roundManager.play(carInfos);
             outputHandler.showRoundResult(carInfos);

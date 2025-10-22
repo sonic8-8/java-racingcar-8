@@ -14,6 +14,11 @@ public class OutputHandler {
         System.out.println("시도할 횟수는 몇 회인가요?");
     }
 
+    public void showExecutionResultMessage() {
+        System.out.println();
+        System.out.println("실행 결과");
+    }
+
     public void showRoundResult(List<CarInfo> carInfos) {
         for (CarInfo carInfo : carInfos) {
             System.out.print(carInfo.getName() + " : ");
