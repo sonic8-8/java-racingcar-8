@@ -2,27 +2,44 @@ package racingcar;
 
 import racingcar.io.InputHandler;
 import racingcar.io.OutputHandler;
+import racingcar.model.RoundManager;
+import racingcar.util.UserInputCarNameParser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RacingCar {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
+    private final UserInputCarNameParser parser;
+    private final RoundManager roundManager;
 
-    public RacingCar(InputHandler inputHandler, OutputHandler outputHandler) {
+    private List<CarInfo> carInfos = new ArrayList<>();
+
+    public RacingCar(InputHandler inputHandler, OutputHandler outputHandler, UserInputCarNameParser parser, RoundManager roundManager) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
+        this.parser = parser;
+        this.roundManager = roundManager;
     }
 
     public void run() {
         outputHandler.askCarNames();
         String userInput = inputHandler.getCarNamesFromUser();
 
-        // TODO: 파싱 후 자동차 이동 거리를 관리할 객체에 추가하기
+        List<String> carNames = parser.parse(userInput);
+        for (String carName : carNames) {
+            carInfos.add(CarInfo.of(carName, 0));
+        }
 
-        // TODO: 횟수 진행
-        // round 진행을 담당할 객체가 필요한 듯
+        outputHandler.askAttemptCount();
+        int count = inputHandler.getAttemptCountFromUser();
 
-        // TODO: 우승자 출력
-        // round 진행을 담당한 객체에게 우승자를 묻고 가져오기
-        outputHandler.showGameWinnersFrom();
+        for (int round = 0; round < count; round++) {
+            roundManager.play(carInfos);
+            outputHandler.showRoundResult(carInfos);
+        }
+
+        outputHandler.showGameWinnersFrom(carInfos);
     }
 }

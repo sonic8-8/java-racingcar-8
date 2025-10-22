@@ -12,4 +12,16 @@ public class CarInfo {
     public static CarInfo of(String name, int distance) {
         return new CarInfo(name, distance);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void moveForward() {
+        this.distance++;
+    }
 }
