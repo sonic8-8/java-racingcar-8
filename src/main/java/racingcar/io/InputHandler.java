@@ -3,11 +3,7 @@ package racingcar.io;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputHandler {
-    public String getCarNamesFromUser() {
+    public String getUserInput() {
         return Console.readLine();
-    }
-
-    public int getAttemptCountFromUser() {
-        return Integer.parseInt(Console.readLine());
     }
 }
