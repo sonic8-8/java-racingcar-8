@@ -1,4 +1,4 @@
-package racingcar.util;
+package racingcar.processor;
 
 import racingcar.exception.GameException;
 

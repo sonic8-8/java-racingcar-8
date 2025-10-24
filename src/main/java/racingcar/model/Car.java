@@ -1,16 +1,16 @@
-package racingcar;
+package racingcar.model;
 
-public class CarInfo {
+public class Car {
     private String name;
     private int distance;
 
-    private CarInfo(String name, int distance) {
+    private Car(String name, int distance) {
         this.name = name;
         this.distance = distance;
     }
 
-    public static CarInfo of(String name, int distance) {
-        return new CarInfo(name, distance);
+    public static Car of(String name, int distance) {
+        return new Car(name, distance);
     }
 
     public String getName() {

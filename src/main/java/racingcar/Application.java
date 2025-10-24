@@ -2,9 +2,8 @@ package racingcar;
 
 import racingcar.io.InputHandler;
 import racingcar.io.OutputHandler;
-import racingcar.model.RoundManager;
-import racingcar.util.UserInputCarNameParser;
-import racingcar.util.UserInputValidator;
+import racingcar.processor.UserInputCarNameParser;
+import racingcar.processor.UserInputValidator;
 
 public class Application {
     public static void main(String[] args) {
@@ -14,7 +13,7 @@ public class Application {
         UserInputValidator userInputValidator = new UserInputValidator();
         UserInputCarNameParser parser = new UserInputCarNameParser();
 
-        RacingCar racingCar = new RacingCar(inputHandler, outputHandler, parser, roundManager, userInputValidator);
-        racingCar.run();
+        RacingGame racingGame = new RacingGame(inputHandler, outputHandler, parser, roundManager, userInputValidator);
+        racingGame.run();
     }
 }

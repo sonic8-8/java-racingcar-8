@@ -1,6 +1,6 @@
 package racingcar.io;
 
-import racingcar.CarInfo;
+import racingcar.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ public class OutputHandler {
         System.out.println("실행 결과");
     }
 
-    public void showRoundResult(List<CarInfo> carInfos) {
-        for (CarInfo carInfo : carInfos) {
-            System.out.print(carInfo.getName() + " : ");
-            for (int dist = 0; dist < carInfo.getDistance(); dist++) {
+    public void showRoundResult(List<Car> cars) {
+        for (Car car : cars) {
+            System.out.print(car.getName() + " : ");
+            for (int dist = 0; dist < car.getDistance(); dist++) {
                 System.out.print("-");
             }
             System.out.println();
@@ -30,19 +30,19 @@ public class OutputHandler {
         System.out.println();
     }
 
-    public void showGameWinnersFrom(List<CarInfo> carInfos) {
+    public void showGameWinnersFrom(List<Car> cars) {
         System.out.print("최종 우승자 : ");
 
         List<String> winners = new ArrayList<>();
 
         int maxDistance = 0;
-        for (CarInfo carInfo : carInfos) {
-            maxDistance = Math.max(maxDistance, carInfo.getDistance());
+        for (Car car : cars) {
+            maxDistance = Math.max(maxDistance, car.getDistance());
         }
 
-        for (CarInfo carInfo : carInfos) {
-            if (carInfo.getDistance() == maxDistance) {
-                winners.add(carInfo.getName());
+        for (Car car : cars) {
+            if (car.getDistance() == maxDistance) {
+                winners.add(car.getName());
             }
         }
 

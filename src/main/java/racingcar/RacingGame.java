@@ -2,23 +2,23 @@ package racingcar;
 
 import racingcar.io.InputHandler;
 import racingcar.io.OutputHandler;
-import racingcar.model.RoundManager;
-import racingcar.util.UserInputCarNameParser;
-import racingcar.util.UserInputValidator;
+import racingcar.model.Car;
+import racingcar.processor.UserInputCarNameParser;
+import racingcar.processor.UserInputValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RacingCar {
+public class RacingGame {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private final UserInputCarNameParser parser;
     private final RoundManager roundManager;
     private final UserInputValidator validator;
 
-    private List<CarInfo> carInfos = new ArrayList<>();
+    private List<Car> cars = new ArrayList<>();
 
-    public RacingCar(InputHandler inputHandler, OutputHandler outputHandler, UserInputCarNameParser parser, RoundManager roundManager, UserInputValidator validator) {
+    public RacingGame(InputHandler inputHandler, OutputHandler outputHandler, UserInputCarNameParser parser, RoundManager roundManager, UserInputValidator validator) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
         this.parser = parser;
@@ -33,7 +33,7 @@ public class RacingCar {
         List<String> carNames = parser.parse(userInput);
         for (String carName : carNames) {
             validator.validateCarNameLength(carName);
-            carInfos.add(CarInfo.of(carName, 0));
+            cars.add(Car.of(carName, 0));
         }
 
         outputHandler.askAttemptCount();
@@ -44,10 +44,10 @@ public class RacingCar {
         outputHandler.showExecutionResultMessage();
 
         for (int round = 0; round < number; round++) {
-            roundManager.play(carInfos);
-            outputHandler.showRoundResult(carInfos);
+            roundManager.play(cars);
+            outputHandler.showRoundResult(cars);
         }
 
-        outputHandler.showGameWinnersFrom(carInfos);
+        outputHandler.showGameWinnersFrom(cars);
     }
 }
