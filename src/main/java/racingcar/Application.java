@@ -9,11 +9,10 @@ public class Application {
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
         OutputHandler outputHandler = new OutputHandler();
-        RoundManager roundManager = new RoundManager();
         UserInputValidator userInputValidator = new UserInputValidator();
         UserInputCarNameParser parser = new UserInputCarNameParser();
 
-        RacingGame racingGame = new RacingGame(inputHandler, outputHandler, parser, roundManager, userInputValidator);
+        RacingGame racingGame = new RacingGame(inputHandler, outputHandler, parser, userInputValidator);
         racingGame.run();
     }
 }

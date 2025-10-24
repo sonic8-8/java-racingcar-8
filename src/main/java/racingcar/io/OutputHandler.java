@@ -1,9 +1,10 @@
 package racingcar.io;
 
+import racingcar.dto.CarSnapshot;
 import racingcar.model.Car;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputHandler {
     public void askCarNames() {
@@ -19,39 +20,14 @@ public class OutputHandler {
         System.out.println("실행 결과");
     }
 
-    public void showRoundResult(List<Car> cars) {
-        for (Car car : cars) {
-            System.out.print(car.getName() + " : ");
-            for (int dist = 0; dist < car.getDistance(); dist++) {
-                System.out.print("-");
-            }
-            System.out.println();
+    public void showRoundResult(List<CarSnapshot> carSnapshots) {
+        for (CarSnapshot carSnapshot : carSnapshots) {
+            System.out.println(carSnapshot.name() + " : " + "-".repeat(carSnapshot.distance()));
         }
         System.out.println();
     }
 
-    public void showGameWinnersFrom(List<Car> cars) {
-        System.out.print("최종 우승자 : ");
-
-        List<String> winners = new ArrayList<>();
-
-        int maxDistance = 0;
-        for (Car car : cars) {
-            maxDistance = Math.max(maxDistance, car.getDistance());
-        }
-
-        for (Car car : cars) {
-            if (car.getDistance() == maxDistance) {
-                winners.add(car.getName());
-            }
-        }
-
-        for (String winner : winners) {
-            if (winner.equals(winners.getLast())) {
-                System.out.println(winner);
-                break;
-            }
-            System.out.print(winner + ", ");
-        }
+    public void showGameWinnersFrom(String winnerNames) {
+        System.out.print("최종 우승자 : " + winnerNames);
     }
 }
