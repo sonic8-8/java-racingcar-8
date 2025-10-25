@@ -1,7 +1,5 @@
 package racingcar.model;
 
-import racingcar.dto.CarSnapshot;
-
 public class Car {
     private String name;
     private int distance;

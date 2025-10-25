@@ -1,10 +1,8 @@
 package racingcar.io;
 
 import racingcar.dto.CarSnapshot;
-import racingcar.model.Car;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OutputHandler {
     public void askCarNames() {
