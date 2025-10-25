@@ -2,6 +2,9 @@ package racingcar.processor;
 
 import racingcar.exception.GameException;
 
+import java.util.HashSet;
+import java.util.List;
+
 public class UserInputValidator {
     public void validatePositiverNumber(String userInput) {
         int number;
@@ -23,7 +26,16 @@ public class UserInputValidator {
         if (carName.isEmpty()) {
             throw new GameException("자동차 이름은 1자 이상으로 설정해야 합니다.");
         }
-        // TODO: 중복 검증 필요
 
+        if (carName.contains(" ")) {
+            throw new GameException("자동차 이름에 공백을 넣을 수 없습니다.");
+        }
+    }
+
+    public void validateDuplicateCarNames(List<String> carNames) {
+        HashSet<String> uniqueNames = new HashSet<>(carNames);
+        if (uniqueNames.size() < carNames.size()) {
+            throw new GameException("자동차 이름에 중복이 있습니다.");
+        }
     }
 }

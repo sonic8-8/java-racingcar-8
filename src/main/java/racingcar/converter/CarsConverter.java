@@ -20,13 +20,15 @@ public class CarsConverter {
     public Cars convertCarsFrom(String userInput) {
         List<String> carNames = parser.parse(userInput);
 
-        List<Car> carList = carNames.stream()
+        validator.validateDuplicateCarNames(carNames);
+
+        List<Car> cars = carNames.stream()
                 .map(carName -> {
                     validator.validateCarNameLength(carName);
                     return Car.of(carName, 0);
                 })
                 .toList();
 
-        return Cars.of(carList);
+        return Cars.of(cars);
     }
 }
