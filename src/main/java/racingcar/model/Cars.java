@@ -18,11 +18,9 @@ public class Cars {
     }
 
     public void playRound(MoveStrategy moveStrategy) {
-        for (Car car : cars) {
-            if (moveStrategy.isMovable()) {
-                car.moveForward();
-            }
-        }
+        cars.stream()
+                .filter(car -> moveStrategy.isMovable())
+                .forEach(Car::moveForward);
     }
 
     public List<CarSnapshot> snapshot() {
