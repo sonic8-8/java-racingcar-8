@@ -1,7 +1,7 @@
 package racingcar.model;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.dto.CarSnapshot;
+import racingcar.model.strategy.MoveStrategy;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,10 +18,9 @@ public class Cars {
         return new Cars(cars);
     }
 
-    public void playRound() {
+    public void playRound(MoveStrategy moveStrategy) {
         for (Car car : cars) {
-            int random = Randoms.pickNumberInRange(0, 9);
-            if (4 <= random) {
+            if (moveStrategy.isMovable()) {
                 car.moveForward();
             }
         }
@@ -33,18 +32,15 @@ public class Cars {
                 .toList();
     }
 
-    public String findWinners() {
+    public List<String> findWinners() {
         int maxDistance = cars.stream()
                 .max(Comparator.comparingInt(Car::getDistance))
                 .orElseThrow(IllegalArgumentException::new)
                 .getDistance();
 
-        List<Car> winners = cars.stream()
+        return cars.stream()
                 .filter(car -> maxDistance == car.getDistance())
+                .map(Car::getName)
                 .toList();
-
-        return winners.stream()
-                .map(car -> car.getName())
-                .collect(Collectors.joining(", "));
     }
 }

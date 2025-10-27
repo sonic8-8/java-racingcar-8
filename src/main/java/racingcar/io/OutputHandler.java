@@ -25,7 +25,8 @@ public class OutputHandler {
         System.out.println();
     }
 
-    public void showGameWinnersFrom(String winnerNames) {
-        System.out.print("최종 우승자 : " + winnerNames);
+    public void showGameWinnersFrom(List<String> winnerNames) {
+        String winners = String.join(", ", winnerNames);
+        System.out.print("최종 우승자 : " + winners);
     }
 }

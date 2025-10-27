@@ -5,21 +5,24 @@ import racingcar.converter.CarsConverter;
 import racingcar.io.InputHandler;
 import racingcar.io.OutputHandler;
 import racingcar.model.Cars;
+import racingcar.model.strategy.MoveStrategy;
 
 public class RacingGame {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private final CarsConverter carsConverter;
     private final AttemptCountConverter attemptCountConverter;
+    private final MoveStrategy moveStrategy;
 
     private Cars cars;
     private int attemptCount;
 
-    public RacingGame(InputHandler inputHandler, OutputHandler outputHandler, CarsConverter carsConverter, AttemptCountConverter attemptCountConverter) {
+    public RacingGame(InputHandler inputHandler, OutputHandler outputHandler, CarsConverter carsConverter, AttemptCountConverter attemptCountConverter, MoveStrategy moveStrategy) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
         this.carsConverter = carsConverter;
         this.attemptCountConverter = attemptCountConverter;
+        this.moveStrategy = moveStrategy;
     }
 
     public void run() {
@@ -50,7 +53,7 @@ public class RacingGame {
     private void playRounds() {
         outputHandler.showExecutionResultMessage();
         for (int round = 0; round < attemptCount; round++) {
-            cars.playRound();
+            cars.playRound(moveStrategy);
             outputHandler.showRoundResult(cars.snapshot());
         }
     }
